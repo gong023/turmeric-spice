@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# you need to copy this file to git/hooks/pre-commit
+# cd .git/hooks/; ln -s ../../.git_template/hooks/pre-commit pre-commit
+
+EXIT_CODE=0
+TOP_DIR=`dirname "${0}"`/../../
+
+for FILE in `git diff-index --name-status HEAD -- | grep -E '^[AUM].*.php$'| cut -c3-`; do
+    if php -l "${FILE}"; then
+        if ! "${TOP_DIR}"vendor/bin/php-cs-fixer fix $FILE --verbose --dry-run --diff --config-file="${TOP_DIR}".php_cs; then
+            EXIT_CODE=1
+        fi
+    else
+        EXIT_CODE=1
+    fi
+done
+
+exit $EXIT_CODE

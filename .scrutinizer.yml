@@ -1,0 +1,21 @@
+filter:
+    excluded_paths:
+        - 'tests/*'
+        - 'bin/*'
+        - 'generate-api.sh'
+checks:
+    php:
+        uppercase_constants: true
+        line_length:
+            max_length: '120'
+
+coding_style:
+    php:
+        spaces:
+            before_parentheses:
+                function_declaration: true
+                closure_definition: true
+            around_operators:
+                concatenation: true
+            other:
+                after_type_cast: false

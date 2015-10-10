@@ -20,7 +20,7 @@ class Attributes
 
     public function mayHave($key)
     {
-        if (empty($this->attributes[$key])) {
+        if (! isset($this->attributes[$key])) {
             return new Optional($key, null);
         }
 
@@ -29,7 +29,7 @@ class Attributes
 
     public function mustHave($key)
     {
-        if (empty($this->attributes[$key])) {
+        if (! isset($this->attributes[$key])) {
             throw new InvalidAttributeException("$key is not set.");
         }
 

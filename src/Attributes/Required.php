@@ -12,11 +12,11 @@ class Required extends ValueAbstract
     public function asString(callable $validate = null)
     {
         if (empty($this->value)) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         return (string)$this->value;
@@ -30,11 +30,11 @@ class Required extends ValueAbstract
     public function asInteger(callable $validate = null)
     {
         if ($this->value === null) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         return (int)$this->value;
@@ -48,11 +48,11 @@ class Required extends ValueAbstract
     public function asFloat(callable $validate = null)
     {
         if ($this->value === null) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         return (float)$this->value;
@@ -66,11 +66,11 @@ class Required extends ValueAbstract
     public function asBoolean(callable $validate = null)
     {
         if ($this->value === null) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         return (bool)$this->value;
@@ -85,7 +85,7 @@ class Required extends ValueAbstract
     public function asInstance($className, callable $validate = null)
     {
         if (! $this->value instanceof $className) {
-            throw new InvalidAttributeException($this->key . 'is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
         }
 
         if ($validate !== null && ! $validate($this->value)) {

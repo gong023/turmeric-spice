@@ -1,0 +1,8 @@
+#!/bin/sh
+
+EXIT_CODE=0
+TOP_DIR=`dirname "${0}"`/../../
+
+for FILE in `git diff-index --name-status HEAD -- | grep -E '^[AUM].*.php$'| cut -c3-`; do
+    "${TOP_DIR}"vendor/bin/php-cs-fixer fix $FILE --verbose --diff --config-file="${TOP_DIR}".php_cs
+done

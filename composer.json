@@ -20,5 +20,10 @@
         "psr-4": {
             "TurmericSpice\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TurmericSpice\\": "tests"
+        }
     }
 }

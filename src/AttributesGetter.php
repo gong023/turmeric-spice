@@ -2,11 +2,11 @@
 
 namespace TurmericSpice;
 
-trait Getter
+trait AttributesGetter
 {
     public function __construct(array $attributes)
     {
-        $this->attributes = new Attributes($attributes);
+        $this->attributes = new Container($attributes);
     }
 
     private function mustHaveAsInt(callable $validate = null)

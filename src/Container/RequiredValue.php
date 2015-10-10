@@ -1,8 +1,8 @@
 <?php
 
-namespace TurmericSpice\Attributes;
+namespace TurmericSpice\Container;
 
-class Required extends ValueAbstract
+class RequiredValue extends ValueAbstract
 {
     /**
      * @param callable|null $validate

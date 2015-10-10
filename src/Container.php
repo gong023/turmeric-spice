@@ -2,11 +2,11 @@
 
 namespace TurmericSpice;
 
-use TurmericSpice\Attributes\InvalidAttributeException;
-use TurmericSpice\Attributes\Optional;
-use TurmericSpice\Attributes\Required;
+use TurmericSpice\Container\InvalidAttributeException;
+use TurmericSpice\Container\OptionalValue;
+use TurmericSpice\Container\RequiredValue;
 
-class Attributes
+class Container
 {
     /**
      * @var array
@@ -21,10 +21,10 @@ class Attributes
     public function mayHave($key)
     {
         if (! isset($this->attributes[$key])) {
-            return new Optional($key, null);
+            return new OptionalValue($key, null);
         }
 
-        return new Optional($key, $this->attributes[$key]);
+        return new OptionalValue($key, $this->attributes[$key]);
     }
 
     public function mustHave($key)
@@ -33,7 +33,7 @@ class Attributes
             throw new InvalidAttributeException("$key is not set.");
         }
 
-        return new Required($key, $this->attributes[$key]);
+        return new RequiredValue($key, $this->attributes[$key]);
     }
 
     public function getRaw()

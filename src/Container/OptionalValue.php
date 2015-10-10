@@ -1,8 +1,8 @@
 <?php
 
-namespace TurmericSpice\Attributes;
+namespace TurmericSpice\Container;
 
-class Optional extends ValueAbstract
+class OptionalValue extends ValueAbstract
 {
     /**
      * @param callable|null $validate
@@ -110,7 +110,7 @@ class Optional extends ValueAbstract
     }
 
     /**
-     * Only Optional value is allowed to return null
+     * Only OptionalValue value is allowed to return null
      *
      * @return mixed|null
      */

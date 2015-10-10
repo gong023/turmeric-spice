@@ -1,6 +1,6 @@
 <?php
 
-namespace TurmericSpice\Attributes;
+namespace TurmericSpice\Container;
 
 class InvalidAttributeException extends \Exception
 {

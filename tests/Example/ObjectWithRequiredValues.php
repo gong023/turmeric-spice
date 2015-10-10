@@ -2,11 +2,11 @@
 
 namespace TurmericSpice\Example;
 
-use TurmericSpice\Getter;
+use TurmericSpice\AttributesGetter;
 
 class ObjectWithRequiredValues
 {
-    use Getter {
+    use AttributesGetter {
         mustHaveAsInt as public getOne;
         mustHaveAsFloat as public getPointOne;
         mustHaveAsString as public getString;

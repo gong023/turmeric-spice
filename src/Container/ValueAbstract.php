@@ -1,6 +1,6 @@
 <?php
 
-namespace TurmericSpice\Attributes;
+namespace TurmericSpice\Container;
 
 abstract class ValueAbstract
 {

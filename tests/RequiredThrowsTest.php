@@ -7,7 +7,7 @@ use TurmericSpice\Example\ObjectWithRequiredValues;
 class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetOneThrowsWithUndefined()
     {
@@ -16,7 +16,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetOneThrowsWithNull()
     {
@@ -25,7 +25,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetPointOneThrowsWithUndefined()
     {
@@ -34,7 +34,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetPointOneThrowsWithNull()
     {
@@ -43,7 +43,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetTrueThrowsWithUndefined()
     {
@@ -52,7 +52,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetTrueThrowsWithNull()
     {
@@ -61,7 +61,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetStringThrowsWithUndefined()
     {
@@ -71,7 +71,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider emptyValueProvider
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      * @param $emptyValue
      */
     public function testGetStringThrowsWithEmptyValues($emptyValue)
@@ -81,7 +81,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
     public function testGetArrayThrowsWithUndefined()
     {
@@ -91,7 +91,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider emptyValueProvider
-     * @expectedException \TurmericSpice\Attributes\InvalidAttributeException
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
      * @param $emptyValue
      */
     public function testArrayThrowsWithEmptyValues($emptyValue)

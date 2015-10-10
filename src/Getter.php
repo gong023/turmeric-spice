@@ -9,11 +9,6 @@ trait Getter
         $this->attributes = new Attributes($attributes);
     }
 
-    public function getRaw()
-    {
-        return $this->attributes->getRaw();
-    }
-
     private function mustHaveAsInt(callable $validate = null)
     {
         static $propertyName;

@@ -1,4 +1,4 @@
-turmeric-spice
+turmeric-spice [![Build Status](https://travis-ci.org/gong023/turmeric-spice.svg?branch=master)](https://travis-ci.org/gong023/turmeric-spice) [![Coverage Status](https://coveralls.io/repos/gong023/turmeric-spice/badge.svg?branch=master&service=github)](https://coveralls.io/github/gong023/turmeric-spice?branch=master) [![Latest Stable Version](https://poser.pugx.org/gong023/turmeric-spice/v/stable)](https://packagist.org/packages/gong023/turmeric-spice)
 =====================
 
 TurmericSpice is a library inspired by [MagicSpice](https://github.com/gree/MagicSpice).
@@ -8,6 +8,10 @@ Give class syntax sugar for getter/setter.
 # Installation
 
 via composer
+
+```
+composer require gong023/turmeric-spice
+```
 
 # Basic Usage
 
@@ -111,4 +115,4 @@ As with MagicSpice, TurmericSpice is also IDE friendly.
 
 ### More example
 
-If you want to know more, see Example and test cases.
+If you want to know more, [see Example and test cases](https://github.com/gong023/turmeric-spice/tree/master/tests/Example).

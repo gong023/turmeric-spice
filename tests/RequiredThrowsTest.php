@@ -20,7 +20,7 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOneThrowsWithNull()
     {
-        $required = new ObjectWithRequiredValues(['One' => null]);
+        $required = new ObjectWithRequiredValues(['one' => null]);
         $required->getOne();
     }
 

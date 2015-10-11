@@ -36,6 +36,13 @@ class Container
         return new RequiredValue($key, $this->attributes[$key]);
     }
 
+    public function set($key, $value)
+    {
+        $this->attributes[$key] = $value;
+
+        return $this;
+    }
+
     public function getRaw()
     {
         return $this->attributes;

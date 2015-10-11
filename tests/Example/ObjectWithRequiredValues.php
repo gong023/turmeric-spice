@@ -2,11 +2,11 @@
 
 namespace TurmericSpice\Example;
 
-use TurmericSpice\AttributesGetter;
+use TurmericSpice\ImmutableAttributes;
 
 class ObjectWithRequiredValues
 {
-    use AttributesGetter {
+    use ImmutableAttributes {
         mustHaveAsInt as public getOne;
         mustHaveAsFloat as public getPointOne;
         mustHaveAsString as public getString;

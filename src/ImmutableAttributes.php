@@ -2,7 +2,7 @@
 
 namespace TurmericSpice;
 
-trait AttributesGetter
+trait ImmutableAttributes
 {
     public function __construct(array $attributes)
     {
@@ -112,7 +112,7 @@ trait AttributesGetter
     /*
      * @return string
      */
-    protected function getCalledPropertyName()
+    public function getCalledPropertyName()
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'];
 

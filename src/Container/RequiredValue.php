@@ -82,7 +82,7 @@ class RequiredValue extends ValueAbstract
      * @return mixed
      * @throws InvalidAttributeException
      */
-    public function asInstance($className, callable $validate = null)
+    public function asInstanceOf($className, callable $validate = null)
     {
         if (! $this->value instanceof $className) {
             throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);

@@ -48,5 +48,5 @@ abstract class ValueAbstract
      * @param callable|null $validate
      * @return mixed
      */
-    abstract public function asInstance($className, callable $validate = null);
+    abstract public function asInstanceOf($className, callable $validate = null);
 }

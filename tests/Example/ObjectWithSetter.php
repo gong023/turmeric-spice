@@ -2,11 +2,11 @@
 
 namespace TurmericSpice\Example;
 
-use TurmericSpice\MutableAttributes;
+use TurmericSpice\ReadWriteAttributes;
 
 class ObjectWithSetter
 {
-    use MutableAttributes {
+    use ReadWriteAttributes {
         mustHaveAsInt as public getId;
         mayHaveAsString as public getName;
         setValue as public setId;

@@ -36,6 +36,26 @@ class Container
         return new RequiredValue($key, $this->attributes[$key]);
     }
 
+    public function mayHaveInstanceCollection($key, $className)
+    {
+        $collection = [];
+        foreach ($this->mayHave($key)->asArray() as $value) {
+            $collection[] = (new OptionalValue($key, $value))->asInstanceOf($className);
+        }
+
+        return $collection;
+    }
+
+    public function mustHaveInstanceCollection($key, $className)
+    {
+        $collection = [];
+        foreach ($this->mustHave($key)->asArray() as $value) {
+            $collection[] = (new RequiredValue($key, $value))->asInstanceOf($className);
+        }
+
+        return $collection;
+    }
+
     public function set($key, $value)
     {
         $this->attributes[$key] = $value;

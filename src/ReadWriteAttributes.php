@@ -14,9 +14,9 @@ namespace TurmericSpice;
  * @method bool mustHaveAsBoolean(callable $validate = null)
  * @method array mustHaveAsArray(callable $validate = null)
  */
-trait MutableAttributes
+trait ReadWriteAttributes
 {
-    use ImmutableAttributes;
+    use ReadableAttributes;
 
     /**
      * @param mixed $value

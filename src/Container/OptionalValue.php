@@ -96,7 +96,7 @@ class OptionalValue extends ValueAbstract
      * @param callable|null $validate
      * @return mixed|null
      */
-    public function asInstance($className, callable $validate = null)
+    public function asInstanceOf($className, callable $validate = null)
     {
         if (! $this->value instanceof $className) {
             return new $className($this->value);

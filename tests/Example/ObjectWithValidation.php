@@ -2,11 +2,11 @@
 
 namespace TurmericSpice\Example;
 
-use TurmericSpice\ImmutableAttributes;
+use TurmericSpice\ReadableAttributes;
 
 class ObjectWithValidation
 {
-    use ImmutableAttributes;
+    use ReadableAttributes;
 
     public function getOneOrZero()
     {
@@ -90,14 +90,14 @@ class ObjectWithValidation
 
     public function getDateTime2014OrNull()
     {
-        return $this->attributes->mayHave('datetime')->asInstance('\\Datetime', function ($value) {
+        return $this->attributes->mayHave('datetime')->asInstanceOf('\\Datetime', function ($value) {
             return $value === new \DateTime('2014-01-01 00:00:00');
         });
     }
 
     public function getDateTime2014OrThrow()
     {
-        return $this->attributes->mustHave('datetime')->asInstance('\\Datetime', function ($value) {
+        return $this->attributes->mustHave('datetime')->asInstanceOf('\\Datetime', function ($value) {
             return $value === new \DateTime('2014-01-01 00:00:00');
         });
     }

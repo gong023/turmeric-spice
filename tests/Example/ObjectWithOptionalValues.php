@@ -2,11 +2,11 @@
 
 namespace TurmericSpice\Example;
 
-use TurmericSpice\ImmutableAttributes;
+use TurmericSpice\ReadableAttributes;
 
 class ObjectWithOptionalValues
 {
-    use ImmutableAttributes {
+    use ReadableAttributes {
         mayHaveAsInt as public getOne;
         mayHaveAsFloat as public getPointOne;
         mayHaveAsString as public getString;

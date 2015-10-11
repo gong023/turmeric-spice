@@ -2,7 +2,7 @@
 
 namespace TurmericSpice;
 
-trait ImmutableAttributes
+trait ReadableAttributes
 {
     public function __construct(array $attributes)
     {
@@ -107,6 +107,19 @@ trait ImmutableAttributes
         }
 
         return $this->attributes->mayHave($propertyName)->asArray($validate);
+    }
+
+    public function toArray()
+    {
+        $array = [];
+        foreach (array_keys($this->attributes->getRaw()) as $keyName) {
+            $getterFuncName = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $keyName)));
+            if (is_callable([$this, $getterFuncName])) {
+                $array[$keyName] = call_user_func([$this, $getterFuncName]);
+            }
+        }
+
+        return $array;
     }
 
     /*

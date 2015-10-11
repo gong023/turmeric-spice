@@ -3,7 +3,7 @@
 <phpunit>
     <testsuites>
         <testsuite name="TurmericSpice Test Suite">
-            <directory suffix="Test.php">tests/TurmericSpice/</directory>
+            <directory suffix="Test.php">tests/</directory>
         </testsuite>
     </testsuites>
 

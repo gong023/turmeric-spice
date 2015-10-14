@@ -4,7 +4,7 @@ namespace TurmericSpice;
 
 trait ReadableAttributes
 {
-    public function __construct(array $attributes)
+    public function __construct(array $attributes = [])
     {
         $this->attributes = new Container($attributes);
     }

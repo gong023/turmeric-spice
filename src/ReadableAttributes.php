@@ -130,7 +130,7 @@ trait ReadableAttributes
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'];
 
         return strtolower(preg_replace(
-            '/[A-Z0-9]/',
+            '/[A-Z]/',
             '_$0',
             lcfirst(preg_replace('/^(get|set)/', '', $backtrace))
         ));

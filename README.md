@@ -75,7 +75,7 @@ $user->setName('Taro');
 $user->getName(); // 'Taro'
 ```
 
-### may or must
+# may or must
 
 TurmericSpice has two dsl, `may` and `must`.
 
@@ -109,10 +109,10 @@ $user->getFriendIds();  // If key is not defined, you will get InvalidAttributeE
 $user->getRestricted(); // return false. casted automatically.
 ```
 
-### IDE friendly
+# IDE friendly
 
 As with MagicSpice, TurmericSpice is also IDE friendly.
 
-### More example
+# More example
 
 If you want to know more, [see Example and test cases](https://github.com/gong023/turmeric-spice/tree/master/tests/Example).

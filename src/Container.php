@@ -59,8 +59,6 @@ class Container
     public function set($key, $value)
     {
         $this->attributes[$key] = $value;
-
-        return $this;
     }
 
     public function getRaw()

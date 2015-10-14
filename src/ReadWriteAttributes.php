@@ -29,6 +29,8 @@ trait ReadWriteAttributes
             $propertyName = $this->getCalledPropertyName();
         }
 
-        return $this->attributes->set($propertyName, $value);
+        $this->attributes->set($propertyName, $value);
+
+        return $this;
     }
 }

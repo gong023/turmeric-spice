@@ -109,10 +109,96 @@ $user->getFriendIds();  // If key is not defined, you will get InvalidAttributeE
 $user->getRestricted(); // return false. casted automatically.
 ```
 
+# Advanced Usage
+
+### Get raw value
+
+```php
+use TurmericSpice\ReadableAttributes;
+
+class User
+{
+    use ReadableAttributes;
+    
+    public function getIdRaw()
+    {
+        return $this->attributes->mayHave('id')->value();
+    }
+    
+    public function getRawArray()
+    {
+        return $this->attributes->getRaw();
+    }
+}
+
+$user = new User(['id' => '1']);
+$user->getIdRaw();    // return '1'.
+$user->getRawArray(); // return ['id' => '1']
+```
+
+### Get as instance / instanceCollection
+
+```php
+use TurmericSpice\ReadableAttributes;
+
+class User
+{
+    use ReadableAttributes;
+    
+    public function getCreated()
+    {
+        return $this->attributes->mayHave('created')->asInstanceOf('\\Datetime');
+    }
+
+    public function getUpdatedHistories()
+    {
+        return $this->attributes->mayHaveInstanceCollection('updated_histories', '\\Datetime');
+    }
+}
+
+$user = new User([
+    'created'           => '2015-01-01 00:00:00',
+    'updated_histories' => ['2015-01-01 00:00:00', '2016-01-01 00:00:00'],
+]);
+
+$user->getCreated();          // return new Datetime('2015-01-01 00:00:00').
+$user->getUpdatedHistories(); // return [new Datetime('2015-01-01 00:00:00'), new Datetime('2016-01-01 00:00:00')]
+```
+
+### Validation
+
+```php
+use TurmericSpice\ReadableAttributes;
+
+class User
+{
+    use ReadableAttributes;
+    
+    public function getOneOrZero()
+    {
+        return $this->attributes->mayHave('id')->asInteger(function ($value) {
+            return $value === 1;
+        });
+    }
+    
+    public function getOne()
+    {
+        return $this->attributes->mustHave('id')->asInteger(function ($value) {
+            return $value === 1;
+        });
+    }
+}
+
+$user = new User(['id' => 2]);
+$user->getOneOrZero(); // return 0.
+$user->getOne();       // throws exception.
+```
+
+### More example
+
+If you want to know more, [see Example and test cases](https://github.com/gong023/turmeric-spice/tree/master/tests/Example).
+
 # IDE friendly
 
 As with MagicSpice, TurmericSpice is also IDE friendly.
 
-# More example
-
-If you want to know more, [see Example and test cases](https://github.com/gong023/turmeric-spice/tree/master/tests/Example).

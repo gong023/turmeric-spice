@@ -4,6 +4,8 @@ namespace TurmericSpice;
 
 trait ReadableAttributes
 {
+    protected $attributes;
+
     public function __construct(array $attributes = [])
     {
         $this->attributes = new Container($attributes);
@@ -59,6 +61,46 @@ trait ReadableAttributes
         return $this->attributes->mustHave($propertyName)->asArray($validate);
     }
 
+    private function mustHaveAsIntArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mustHave($propertyName)->asIntegerArray();
+    }
+
+    private function mustHaveAsStringArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mustHave($propertyName)->asStringArray();
+    }
+
+    private function mustHaveAsFloatArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mustHave($propertyName)->asFloatArray();
+    }
+
+    private function mustHaveBooleanArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mustHave($propertyName)->asBooleanArray();
+    }
+
     private function mayHaveAsInt(callable $validate = null)
     {
         static $propertyName;
@@ -107,6 +149,46 @@ trait ReadableAttributes
         }
 
         return $this->attributes->mayHave($propertyName)->asArray($validate);
+    }
+
+    private function mayHaveAsIntArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mayHave($propertyName)->asIntegerArray();
+    }
+
+    private function mayHaveAsStringArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mayHave($propertyName)->asStringArray();
+    }
+
+    private function mayHaveAsFloatArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mayHave($propertyName)->asFloatArray();
+    }
+
+    private function mayHaveBooleanArray()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->getCalledPropertyName();
+        }
+
+        return $this->attributes->mayHave($propertyName)->asBooleanArray();
     }
 
     public function toArray()

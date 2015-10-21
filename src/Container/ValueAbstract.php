@@ -97,7 +97,7 @@ abstract class ValueAbstract
             if (is_array($val)) {
                 return $this->castRecursively($val, $castedType, $arg);
             }
-            return call_user_func([(new static($this->key, $val)), $castedType], $arg);
+            return call_user_func_array([(new static($this->key, $val)), $castedType], $arg);
         }, $arr);
     }
 }

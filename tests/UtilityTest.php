@@ -13,6 +13,11 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
     {
         $this->object_using_utility = new ObjectUsingUtility([
             'created' => '2015-01-01 00:00:00',
+            'updated_histories' => [
+                '2016-01-01 00:00:00',
+                '2017-01-01 00:00:00',
+                '2018-01-01 00:00:00',
+            ]
         ]);
     }
 
@@ -32,10 +37,23 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
         $this->object_using_utility->getCreatedDatetimeOrThrow();
     }
 
+    /**
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
+     */
+    public function testUpdatedHistoriesThrows()
+    {
+        $this->object_using_utility->getUpdatedHistoriesOrThrow();
+    }
+
     public function testGetRaw()
     {
         $expected = [
             'created' => '2015-01-01 00:00:00',
+            'updated_histories' => [
+                '2016-01-01 00:00:00',
+                '2017-01-01 00:00:00',
+                '2018-01-01 00:00:00',
+            ]
         ];
 
         $this->assertSame($expected, $this->object_using_utility->getRaw());
@@ -45,6 +63,11 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
     {
         $expected = [
             'created' => new \DateTime('2015-01-01 00:00:00'),
+            'updated_histories' => [
+                new \Datetime('2016-01-01 00:00:00'),
+                new \Datetime('2017-01-01 00:00:00'),
+                new \Datetime('2018-01-01 00:00:00'),
+            ]
         ];
 
         $this->assertEquals($expected, $this->object_using_utility->toArray());

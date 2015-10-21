@@ -22,6 +22,16 @@ class ObjectUsingUtility
         return $this->attributes->mustHave('created')->asInstanceOf('\\Datetime');
     }
 
+    public function getUpdatedHistories()
+    {
+        return $this->attributes->mayHave('updated_histories')->asInstanceArray('\\Datetime');
+    }
+
+    public function getUpdatedHistoriesOrThrow()
+    {
+        return $this->attributes->mustHave('updated_histories')->asInstanceArray('\\Datetime');
+    }
+
     public function getRaw()
     {
         return $this->attributes->getRaw();

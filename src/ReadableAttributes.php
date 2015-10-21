@@ -91,7 +91,7 @@ trait ReadableAttributes
         return $this->attributes->mustHave($propertyName)->asFloatArray();
     }
 
-    private function mustHaveBooleanArray()
+    private function mustHaveAsBooleanArray()
     {
         static $propertyName;
         if ($propertyName === null) {
@@ -181,7 +181,7 @@ trait ReadableAttributes
         return $this->attributes->mayHave($propertyName)->asFloatArray();
     }
 
-    private function mayHaveBooleanArray()
+    private function mayHaveAsBooleanArray()
     {
         static $propertyName;
         if ($propertyName === null) {

@@ -9,6 +9,32 @@ class OptionalCastedTest extends \PHPUnit_Framework_TestCase
 {
     use AssertChain;
 
+    public function testCasted()
+    {
+        $optional = new ObjectWithOptionalValues([
+            'one'             => '1',
+            'point_one'       => '0.1',
+            'string'          => 1,
+            'true'            => 'true',
+            'array'           => false,
+            'one_array'       => ['1', '2', '3'],
+            'point_one_array' => ['0.1', '0.2', '0.3'],
+            'string_array'    => [1, 2, 3],
+            'true_array'      => ['true', 'true', 'true']
+        ]);
+
+        $this->assert()
+            ->same(1, $optional->getOne())
+            ->same(0.1, $optional->getPointOne())
+            ->same('1', $optional->getString())
+            ->true($optional->getTrue())
+            ->same([], $optional->getArray())
+            ->same([1, 2, 3], $optional->getOneArray())
+            ->same([0.1, 0.2, 0.3], $optional->getPointOneArray())
+            ->same(['1', '2', '3'], $optional->getStringArray())
+            ->same([true, true, true], $optional->getTrueArray());
+    }
+
     public function testCastedWithUndefined()
     {
         $optional = new ObjectWithOptionalValues([]);
@@ -18,7 +44,11 @@ class OptionalCastedTest extends \PHPUnit_Framework_TestCase
             ->same(0.0, $optional->getPointOne())
             ->same('', $optional->getString())
             ->same([], $optional->getArray())
-            ->false($optional->getTrue());
+            ->same([], $optional->getArray())
+            ->same([], $optional->getOneArray())
+            ->same([], $optional->getPointOneArray())
+            ->same([], $optional->getStringArray())
+            ->same([], $optional->getTrueArray());
     }
 
     /**
@@ -40,7 +70,11 @@ class OptionalCastedTest extends \PHPUnit_Framework_TestCase
             ->same(0.0, $optional->getPointOne())
             ->same('', $optional->getString())
             ->same([], $optional->getArray())
-            ->false($optional->getTrue());
+            ->same([], $optional->getArray())
+            ->same([], $optional->getOneArray())
+            ->same([], $optional->getPointOneArray())
+            ->same([], $optional->getStringArray())
+            ->same([], $optional->getTrueArray());
     }
 
     public function emptyValueProvider()

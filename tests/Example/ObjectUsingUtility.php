@@ -24,12 +24,12 @@ class ObjectUsingUtility
 
     public function getUpdatedHistories()
     {
-        return $this->attributes->mayHaveInstanceCollection('updated_histories', '\\Datetime');
+        return $this->attributes->mayHave('updated_histories')->asInstanceArray('\\Datetime');
     }
 
-    public function getUpdatedHistoriesDatetimeOrThrow()
+    public function getUpdatedHistoriesOrThrow()
     {
-        return $this->attributes->mustHaveInstanceCollection('updated_histories', '\\Datetime');
+        return $this->attributes->mustHave('updated_histories')->asInstanceArray('\\Datetime');
     }
 
     public function getRaw()

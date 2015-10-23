@@ -49,4 +49,55 @@ abstract class ValueAbstract
      * @return mixed
      */
     abstract public function asInstanceOf($className, callable $validate = null);
+
+    /**
+     * @return string[]
+     */
+    public function asStringArray()
+    {
+        return $this->castRecursively($this->asArray(), 'asString');
+    }
+
+    /**
+     * @return int[]
+     */
+    public function asIntegerArray()
+    {
+        return $this->castRecursively($this->asArray(), 'asInteger');
+    }
+
+    /**
+     * @return float[]
+     */
+    public function asFloatArray()
+    {
+        return $this->castRecursively($this->asArray(), 'asFloat');
+    }
+
+    /**
+     * @return bool[]
+     */
+    public function asBooleanArray()
+    {
+        return $this->castRecursively($this->asArray(), 'asBoolean');
+    }
+
+    /**
+     * @param $className
+     * @return mixed[]
+     */
+    public function asInstanceArray($className)
+    {
+        return $this->castRecursively($this->asArray(), 'asInstanceOf', [$className]);
+    }
+
+    private function castRecursively($arr, $castedType, $arg = [])
+    {
+        return array_map(function ($val) use ($castedType, $arg) {
+            if (is_array($val)) {
+                return $this->castRecursively($val, $castedType, $arg);
+            }
+            return call_user_func_array([(new static($this->key, $val)), $castedType], $arg);
+        }, $arr);
+    }
 }

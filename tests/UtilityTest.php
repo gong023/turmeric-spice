@@ -12,12 +12,12 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->object_using_utility = new ObjectUsingUtility([
-            'created'           => '2015-01-01 00:00:00',
+            'created' => '2015-01-01 00:00:00',
             'updated_histories' => [
                 '2016-01-01 00:00:00',
                 '2017-01-01 00:00:00',
                 '2018-01-01 00:00:00',
-            ],
+            ]
         ]);
     }
 
@@ -26,11 +26,6 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
         $created = $this->object_using_utility->getCreated();
         $this->assertInstanceOf('\\Datetime', $created);
         $this->assertSame('2015-01-01', $created->format('Y-m-d'));
-    }
-
-    public function testUpdatedHistoriesCastedToDatetimeArray()
-    {
-        $this->assertContainsOnly('\\Datetime', $this->object_using_utility->getUpdatedHistories());
     }
 
     /**
@@ -45,20 +40,20 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
-    public function testUpdateHistoriesThrows()
+    public function testUpdatedHistoriesThrows()
     {
-        $this->object_using_utility->getUpdatedHistoriesDatetimeOrThrow();
+        $this->object_using_utility->getUpdatedHistoriesOrThrow();
     }
 
     public function testGetRaw()
     {
         $expected = [
-            'created'           => '2015-01-01 00:00:00',
+            'created' => '2015-01-01 00:00:00',
             'updated_histories' => [
                 '2016-01-01 00:00:00',
                 '2017-01-01 00:00:00',
                 '2018-01-01 00:00:00',
-            ],
+            ]
         ];
 
         $this->assertSame($expected, $this->object_using_utility->getRaw());
@@ -67,12 +62,12 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
     public function testToArray()
     {
         $expected = [
-            'created'           => new \DateTime('2015-01-01 00:00:00'),
+            'created' => new \DateTime('2015-01-01 00:00:00'),
             'updated_histories' => [
-                new \DateTime('2016-01-01 00:00:00'),
-                new \DateTime('2017-01-01 00:00:00'),
-                new \DateTime('2018-01-01 00:00:00'),
-            ],
+                new \Datetime('2016-01-01 00:00:00'),
+                new \Datetime('2017-01-01 00:00:00'),
+                new \Datetime('2018-01-01 00:00:00'),
+            ]
         ];
 
         $this->assertEquals($expected, $this->object_using_utility->toArray());

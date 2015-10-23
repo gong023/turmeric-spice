@@ -30,6 +30,11 @@ class User
         mayHaveAsBoolean as public getRestricted;
         mayHaveAsArray   as public getFriendIds;
     }
+
+    public function getCreated()
+    {
+        return $this->attributes->mayHave('created')->asInstanceOf('\\Datetime');
+    }
 }
 ```
 
@@ -42,6 +47,7 @@ $user = new User([
     'balance'    => 100.0,
     'restricted' => false,
     'friend_ids' => [2, 3, 4],
+    'created'    => '2015-01-01 00:00:00',
 ]);
 
 $user->getId();        // 1
@@ -49,6 +55,7 @@ $user->getName();      // 'Taro'
 $user->getBalance();   // 100.0
 $user->getRestricted;  // false
 $user->getFriendIds(); // [2, 3, 4]
+$user->getCreated();   // new \Datetime('2015-01-01 00:00:00') casted automatically.
 $user->toArray();      // return array which contains above values.
 ```
 
@@ -77,7 +84,7 @@ $user->getName(); // 'Taro'
 
 # may or must
 
-TurmericSpice has two dsl, `may` and `must`.
+TurmericSpice has two DSL, `may` and `must`.
 
 If nullable value is given at constructor, `may` casts specified type and `must` throws `\TurmericSpice\Container\InvalidAttributeException`.
 
@@ -136,32 +143,37 @@ $user->getIdRaw();    // return '1'.
 $user->getRawArray(); // return ['id' => '1']
 ```
 
-### Get as instance / instanceCollection
+### Get specified type array
+
+You can express `int[]`, `float[]`, `bool[]`, and `YourClass[]`.
 
 ```php
 use TurmericSpice\ReadableAttributes;
 
 class User
 {
-    use ReadableAttributes;
-    
-    public function getCreated()
-    {
-        return $this->attributes->mayHave('created')->asInstanceOf('\\Datetime');
+    use ReadableAttributes {
+        mayHaveAsIntArray    as public getFriendIds;
+        mayHaveStringArray   as public getFriendNames;
+        mustHaveAsFloatArray as public getBalanceHistories;
     }
 
     public function getUpdatedHistories()
     {
-        return $this->attributes->mayHaveInstanceCollection('updated_histories', '\\Datetime');
+        return $this->attributes->mayHave('updated_histories')->asInstanceArray('\\Datetime');
     }
 }
 
 $user = new User([
-    'created'           => '2015-01-01 00:00:00',
+    'friend_ids'        => ['1', '2', '3'],
+    'friend_names'      => ['name1', 'name2', null],
+    'balance_histories' => [10.0, 20.0, null],
     'updated_histories' => ['2015-01-01 00:00:00', '2016-01-01 00:00:00'],
 ]);
 
-$user->getCreated();          // return new Datetime('2015-01-01 00:00:00').
+$user->getFriendIds;          // return [1, 2, 3]
+$user->getFriendNames;        // return ['name1', 'name2', '']
+$user->balanceHistories();    // throw exception.
 $user->getUpdatedHistories(); // return [new Datetime('2015-01-01 00:00:00'), new Datetime('2016-01-01 00:00:00')]
 ```
 

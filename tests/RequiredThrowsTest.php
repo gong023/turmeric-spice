@@ -9,6 +9,15 @@ class RequiredThrowsTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TurmericSpice\Container\InvalidAttributeException
      */
+    public function testToArrayThrowsWithUndefined()
+    {
+        $required = new ObjectWithRequiredValues([]);
+        $required->toArray();
+    }
+
+    /**
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
+     */
     public function testGetOneThrowsWithUndefined()
     {
         $required = new ObjectWithRequiredValues([]);

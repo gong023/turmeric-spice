@@ -192,10 +192,13 @@ trait ReadableAttributes
     public function toArray()
     {
         $array = [];
-        foreach (array_keys($this->attributes->getRaw()) as $keyName) {
-            $getterFuncName = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $keyName)));
-            if (is_callable([$this, $getterFuncName])) {
-                $array[$keyName] = call_user_func([$this, $getterFuncName]);
+        $klass = new \ReflectionClass(__CLASS__);
+        /* @var \ReflectionMethod $method */
+        foreach ($klass->getMethods() as $method) {
+            $methodName = $method->getName();
+            if (strpos($methodName, 'get') === 0) {
+                $keyName = str_replace(' ', '', ucwords(str_replace('_', ' ', $methodName)));
+                $array[$keyName] = call_user_func([$this, $methodName]);
             }
         }
 

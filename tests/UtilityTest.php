@@ -12,11 +12,17 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->object_using_utility = new ObjectUsingUtility([
-            'created' => '2015-01-01 00:00:00',
+            'created'           => '2015-01-01 00:00:00',
+            'created_datetime'  => new \DateTime('2015-01-01 00:00:00'),
             'updated_histories' => [
                 '2016-01-01 00:00:00',
                 '2017-01-01 00:00:00',
                 '2018-01-01 00:00:00',
+            ],
+            'updated_histories_datetime' => [
+                new \Datetime('2016-01-01 00:00:00'),
+                new \Datetime('2017-01-01 00:00:00'),
+                new \Datetime('2018-01-01 00:00:00'),
             ]
         ]);
     }
@@ -33,8 +39,11 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCreatedThrows()
     {
-        // raw created is only string. so exception occurs.
-        $this->object_using_utility->getCreatedDatetimeOrThrow();
+        // raw created is string. so exception occurs.
+        $object_using_utility = new ObjectUsingUtility([
+            'created_datetime' => '2015-01-01 00:00:00',
+        ]);
+        $object_using_utility->getCreatedDatetime();
     }
 
     /**
@@ -42,28 +51,47 @@ class UtilityTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdatedHistoriesThrows()
     {
-        $this->object_using_utility->getUpdatedHistoriesOrThrow();
+        $object_using_utility = new ObjectUsingUtility([
+            'updated_histories_datetime' => [
+                '2016-01-01 00:00:00',
+                '2017-01-01 00:00:00',
+                '2018-01-01 00:00:00',
+            ]
+        ]);
+        $object_using_utility->getUpdatedHistoriesDatetime();
     }
 
     public function testGetRaw()
     {
         $expected = [
-            'created' => '2015-01-01 00:00:00',
+            'created'           => '2015-01-01 00:00:00',
+            'created_datetime'  => new \DateTime('2015-01-01 00:00:00'),
             'updated_histories' => [
                 '2016-01-01 00:00:00',
                 '2017-01-01 00:00:00',
                 '2018-01-01 00:00:00',
+            ],
+            'updated_histories_datetime' => [
+                new \Datetime('2016-01-01 00:00:00'),
+                new \Datetime('2017-01-01 00:00:00'),
+                new \Datetime('2018-01-01 00:00:00'),
             ]
         ];
 
-        $this->assertSame($expected, $this->object_using_utility->getRaw());
+        $this->assertEquals($expected, $this->object_using_utility->getRaw());
     }
 
     public function testToArray()
     {
         $expected = [
-            'created' => new \DateTime('2015-01-01 00:00:00'),
+            'created'           => new \DateTime('2015-01-01 00:00:00'),
+            'created_datetime'  => new \DateTime('2015-01-01 00:00:00'),
             'updated_histories' => [
+                new \Datetime('2016-01-01 00:00:00'),
+                new \Datetime('2017-01-01 00:00:00'),
+                new \Datetime('2018-01-01 00:00:00'),
+            ],
+            'updated_histories_datetime' => [
                 new \Datetime('2016-01-01 00:00:00'),
                 new \Datetime('2017-01-01 00:00:00'),
                 new \Datetime('2018-01-01 00:00:00'),

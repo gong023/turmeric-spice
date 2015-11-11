@@ -26,7 +26,7 @@ trait ReadWriteAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         $this->attributes->set($propertyName, $value);

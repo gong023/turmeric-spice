@@ -13,7 +13,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asInteger($validate);
@@ -23,7 +23,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asString($validate);
@@ -33,7 +33,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asFloat($validate);
@@ -43,7 +43,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asBoolean($validate);
@@ -53,7 +53,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asArray($validate);
@@ -63,7 +63,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asIntegerArray();
@@ -73,7 +73,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asStringArray();
@@ -83,7 +83,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asFloatArray();
@@ -93,7 +93,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mustHave($propertyName)->asBooleanArray();
@@ -103,7 +103,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asInteger($validate);
@@ -113,7 +113,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asString($validate);
@@ -123,7 +123,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asFloat($validate);
@@ -133,7 +133,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asBoolean($validate);
@@ -143,7 +143,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asArray($validate);
@@ -153,7 +153,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asIntegerArray();
@@ -163,7 +163,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asStringArray();
@@ -173,7 +173,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asFloatArray();
@@ -183,7 +183,7 @@ trait ReadableAttributes
     {
         static $propertyName;
         if ($propertyName === null) {
-            $propertyName = $this->getCalledPropertyName();
+            $propertyName = $this->calledPropertyName();
         }
 
         return $this->attributes->mayHave($propertyName)->asBooleanArray();
@@ -196,8 +196,8 @@ trait ReadableAttributes
         /* @var \ReflectionMethod $method */
         foreach ($klass->getMethods() as $method) {
             $methodName = $method->getName();
-            if (strpos($methodName, 'get') === 0) {
-                $keyName = str_replace(' ', '', ucwords(str_replace('_', ' ', $methodName)));
+            if (strpos($methodName, 'get') === 0 && $methodName !== 'get' && $methodName !== 'getRaw') {
+                $keyName = $this->methodNameToPropertyName($methodName);
                 $array[$keyName] = call_user_func([$this, $methodName]);
             }
         }
@@ -208,7 +208,7 @@ trait ReadableAttributes
     /*
      * @return string
      */
-    public function getCalledPropertyName()
+    public function calledPropertyName()
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'];
 
@@ -217,5 +217,18 @@ trait ReadableAttributes
             '_$0',
             lcfirst(preg_replace('/^(get|set)/', '', $backtrace))
         ));
+    }
+
+    public function methodNameToPropertyName($getterName)
+    {
+        $underscored = strtolower(
+            preg_replace(
+                ["/^get/", "/([A-Z]+)/", ],
+                ["", "_$1"],
+                $getterName
+            )
+        );
+
+        return substr($underscored, 1, strlen($underscored));
     }
 }

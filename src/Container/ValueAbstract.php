@@ -51,53 +51,58 @@ abstract class ValueAbstract
     abstract public function asInstanceOf($className, callable $validate = null);
 
     /**
-     * @return string[]
+     * @param callable $validate
+     * @return \string[]
      */
-    public function asStringArray()
+    public function asStringArray(callable $validate = null)
     {
-        return $this->castRecursively($this->asArray(), 'asString');
+        return $this->castArray($this->asArray(), 'asString', [$validate]);
     }
 
     /**
-     * @return int[]
+     * @param callable $validate
+     * @return \int[]
      */
-    public function asIntegerArray()
+    public function asIntegerArray(callable $validate = null)
     {
-        return $this->castRecursively($this->asArray(), 'asInteger');
+        return $this->castArray($this->asArray(), 'asInteger', [$validate]);
     }
 
     /**
-     * @return float[]
+     * @param callable $validate
+     * @return \float[]
      */
-    public function asFloatArray()
+    public function asFloatArray(callable $validate = null)
     {
-        return $this->castRecursively($this->asArray(), 'asFloat');
+        return $this->castArray($this->asArray(), 'asFloat', [$validate]);
     }
 
     /**
-     * @return bool[]
+     * @param callable $validate
+     * @return \bool[]
      */
-    public function asBooleanArray()
+    public function asBooleanArray(callable $validate = null)
     {
-        return $this->castRecursively($this->asArray(), 'asBoolean');
+        return $this->castArray($this->asArray(), 'asBoolean', [$validate]);
     }
 
     /**
      * @param $className
-     * @return mixed[]
+     * @param callable $validate
+     * @return \mixed[]
      */
-    public function asInstanceArray($className)
+    public function asInstanceArray($className, callable $validate = null)
     {
-        return $this->castRecursively($this->asArray(), 'asInstanceOf', [$className]);
+        return $this->castArray($this->asArray(), 'asInstanceOf', [$className, $validate]);
     }
 
-    private function castRecursively($arr, $castedType, $arg = [])
+    private function castArray($rawArray, $castedType, $arg = [])
     {
-        return array_map(function ($val) use ($castedType, $arg) {
-            if (is_array($val)) {
-                return $this->castRecursively($val, $castedType, $arg);
-            }
-            return call_user_func_array([(new static($this->key, $val)), $castedType], $arg);
-        }, $arr);
+        $castedArray = [];
+        foreach ($rawArray as $rawValue) {
+            $castedArray[] = call_user_func_array([(new static($this->key, $rawValue)), $castedType], $arg);
+        }
+
+        return $castedArray;
     }
 }

@@ -102,7 +102,7 @@ class OptionalValue extends ValueAbstract
             return new $className($this->value);
         }
 
-        if ($validate != null && ! $validate($this->value)) {
+        if ($validate !== null && ! $validate($this->value)) {
             return null;
         }
 

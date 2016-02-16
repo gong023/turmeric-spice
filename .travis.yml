@@ -1,7 +1,6 @@
 language: php
 sudo: false
 php:
-- 5.4
 - 5.5
 - 5.6
 script:
@@ -12,8 +11,3 @@ before_script:
 - composer install
 after_script:
 - php vendor/bin/coveralls -v
-#after_success:
-#  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh generate-api.sh; fi
-#env:
-#  global:
-#  - secure: 

@@ -4,14 +4,8 @@ namespace TurmericSpice\Container;
 
 abstract class ValueAbstract
 {
-    protected $key;
-    protected $value;
-
-    public function __construct($key, $value)
-    {
-        $this->key = $key;
-        $this->value = $value;
-    }
+    public $key;
+    public $value;
 
     /**
      * @param callable|null $validate
@@ -97,7 +91,11 @@ abstract class ValueAbstract
             if (is_array($val)) {
                 return $this->castRecursively($val, $castedType, $arg);
             }
-            return call_user_func_array([(new static($this->key, $val)), $castedType], $arg);
+
+            $valueObj = new static();
+            $valueObj->key = $this->key;
+            $valueObj->value = $val;
+            return call_user_func_array([($valueObj), $castedType], $arg);
         }, $arr);
     }
 }

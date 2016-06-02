@@ -12,11 +12,11 @@ class RequiredValue extends ValueAbstract
     public function asString(callable $validate = null)
     {
         if (empty($this->value)) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         return (string)$this->value;
@@ -30,11 +30,11 @@ class RequiredValue extends ValueAbstract
     public function asInteger(callable $validate = null)
     {
         if ($this->value === null) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         return (int)$this->value;
@@ -48,11 +48,11 @@ class RequiredValue extends ValueAbstract
     public function asFloat(callable $validate = null)
     {
         if ($this->value === null) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         return (float)$this->value;
@@ -66,11 +66,11 @@ class RequiredValue extends ValueAbstract
     public function asBoolean(callable $validate = null)
     {
         if ($this->value === null) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         return (bool)$this->value;
@@ -85,11 +85,11 @@ class RequiredValue extends ValueAbstract
     public function asInstanceOf($className, callable $validate = null)
     {
         if (! $this->value instanceof $className) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            throw new InvalidAttributeException(get_class($this->value));
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         return $this->value;
@@ -103,12 +103,11 @@ class RequiredValue extends ValueAbstract
     public function asArray(callable $validate = null)
     {
         if (! is_array($this->value)) {
-            throw new InvalidAttributeException($this->key . ' is invalid:' . $this->value);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         if ($validate !== null && ! $validate($this->value)) {
-            // Exception class cannot take array at first argument.
-            throw new InvalidAttributeException($this->value[0]);
+            throw new InvalidAttributeException($this->key . ' is invalid:' . var_export($this->value, true));
         }
 
         return $this->value;

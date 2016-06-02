@@ -18,6 +18,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             'fruits_names' => ['red', 'green', 'yellow'],
             'flag'         => 'true',
             'datetime'     => new \DateTime('2015-01-01 00:00:00'),
+            'datetime_arr' => [new \DateTime('2015-01-01 00:00:00')],
         ]);
     }
 
@@ -97,5 +98,13 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     public function testGetDateTimeThrow()
     {
         $this->objectWithValidation->getDateTime2014OrThrow();
+    }
+
+    /**
+     * @expectedException \TurmericSpice\Container\InvalidAttributeException
+     */
+    public function testGetDateTimeArrayThrow()
+    {
+        $this->objectWithValidation->getDateTime2014ArrayOrThrow();
     }
 }

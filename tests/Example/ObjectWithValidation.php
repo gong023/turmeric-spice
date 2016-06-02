@@ -101,4 +101,11 @@ class ObjectWithValidation
             return $value === new \DateTime('2014-01-01 00:00:00');
         });
     }
+
+    public function getDateTime2014ArrayOrThrow()
+    {
+        return $this->attributes->mustHave('datetime_arr')->asInstanceArray('\\Datetime', function ($value) {
+            return $value === new \DateTime('2014-01-01 00:00:00');
+        });
+    }
 }

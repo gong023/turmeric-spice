@@ -4,14 +4,8 @@ namespace TurmericSpice\Container;
 
 abstract class ValueAbstract
 {
-    protected $key;
-    protected $value;
-
-    public function __construct($key, $value)
-    {
-        $this->key = $key;
-        $this->value = $value;
-    }
+    public $key;
+    public $value;
 
     /**
      * @param callable|null $validate
@@ -100,7 +94,11 @@ abstract class ValueAbstract
     {
         $castedArray = [];
         foreach ($rawArray as $rawValue) {
-            $castedArray[] = call_user_func_array([(new static($this->key, $rawValue)), $castedType], $arg);
+            $valueObject = new static();
+            $valueObject->key = $this->key;
+            $valueObject->value = $rawValue;
+
+            $castedArray[] = call_user_func_array([$valueObject, $castedType], $arg);
         }
 
         return $castedArray;

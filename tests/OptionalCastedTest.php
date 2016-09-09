@@ -20,7 +20,8 @@ class OptionalCastedTest extends \PHPUnit_Framework_TestCase
             'one_array'       => ['1', '2', '3'],
             'point_one_array' => ['0.1', '0.2', '0.3'],
             'string_array'    => [1, 2, 3],
-            'true_array'      => ['true', 'true', 'true']
+            'true_array'      => ['true', 'true', 'true'],
+            'null_value'      => null,
         ]);
 
         $this->assert()
@@ -32,7 +33,8 @@ class OptionalCastedTest extends \PHPUnit_Framework_TestCase
             ->same([1, 2, 3], $optional->getOneArray())
             ->same([0.1, 0.2, 0.3], $optional->getPointOneArray())
             ->same(['1', '2', '3'], $optional->getStringArray())
-            ->same([true, true, true], $optional->getTrueArray());
+            ->same([true, true, true], $optional->getTrueArray())
+            ->null($optional->getNull());
     }
 
     public function testCastedWithUndefined()

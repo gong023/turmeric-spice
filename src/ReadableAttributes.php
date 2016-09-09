@@ -189,7 +189,7 @@ trait ReadableAttributes
         return $this->attributes->mayHave($propertyName)->asBooleanArray();
     }
 
-    private function getValue()
+    private function mayHaveValue()
     {
         static $propertyName;
         if ($propertyName === null) {

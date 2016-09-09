@@ -16,6 +16,6 @@ class ObjectWithOptionalValues
         mayHaveAsFloatArray   as public getPointOneArray;
         mayHaveAsStringArray  as public getStringArray;
         mayHaveAsBooleanArray as public getTrueArray;
-        getValue              as public getSomeValue;
+        mayHaveValue          as public getSomeValue;
     }
 }

@@ -189,6 +189,16 @@ trait ReadableAttributes
         return $this->attributes->mayHave($propertyName)->asBooleanArray();
     }
 
+    private function mayHaveValue()
+    {
+        static $propertyName;
+        if ($propertyName === null) {
+            $propertyName = $this->calledPropertyName();
+        }
+
+        return $this->attributes->mayHave($propertyName)->value();
+    }
+
     public function toArray()
     {
         $array = [];

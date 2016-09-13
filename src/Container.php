@@ -12,27 +12,19 @@ class Container
      * @var array
      */
     private $attributes;
-    private $optionalValue;
-    private $requiredValue;
 
     public function __construct(array $attributes)
     {
         $this->attributes = $attributes;
-        $this->optionalValue = new OptionalValue();
-        $this->requiredValue = new RequiredValue();
     }
 
     public function mayHave($key)
     {
-        $this->optionalValue->key = $key;
         if (! isset($this->attributes[$key])) {
-            $this->optionalValue->value = null;
-
-            return $this->optionalValue;
+            return new OptionalValue($key, null);
         }
-        $this->optionalValue->value = $this->attributes[$key];
 
-        return $this->optionalValue;
+        return new OptionalValue($key, $this->attributes[$key]);
     }
 
     public function mustHave($key)
@@ -40,10 +32,8 @@ class Container
         if (! isset($this->attributes[$key])) {
             throw new InvalidAttributeException("$key is not set.");
         }
-        $this->requiredValue->key = $key;
-        $this->requiredValue->value = $this->attributes[$key];
 
-        return $this->requiredValue;
+        return new RequiredValue($key, $this->attributes[$key]);
     }
 
     public function set($key, $value)

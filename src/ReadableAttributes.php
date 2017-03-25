@@ -5,7 +5,7 @@ namespace TurmericSpice;
 trait ReadableAttributes
 {
     /** @var Container */
-    private $attributes;
+    protected $attributes;
 
     public function __construct(array $attributes = [])
     {

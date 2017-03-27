@@ -2,11 +2,11 @@
 
 namespace TurmericSpice;
 
+/**
+ * @property Container $attributes
+ */
 trait ReadableAttributes
 {
-    /** @var Container */
-    protected $attributes;
-
     public function __construct(array $attributes = [])
     {
         $this->attributes = new Container($attributes);

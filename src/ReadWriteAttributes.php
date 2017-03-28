@@ -18,6 +18,13 @@ trait ReadWriteAttributes
 {
     use ReadableAttributes;
 
+    protected $attributes;
+
+    public function __construct(array $attributes = [])
+    {
+        $this->attributes = new Container($attributes);
+    }
+
     /**
      * @param mixed $value
      * @return $this

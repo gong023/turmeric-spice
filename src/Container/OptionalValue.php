@@ -99,6 +99,10 @@ class OptionalValue extends ValueAbstract
     public function asInstanceOf($className, callable $validate = null)
     {
         if (! $this->value instanceof $className) {
+            if ($this->value === null && $className === \DateTime::class) {
+                return new $className((string)$this->value);
+            }
+
             return new $className($this->value);
         }
 
